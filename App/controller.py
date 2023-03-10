@@ -160,7 +160,8 @@ def getBooksByTitle(control, title):
     """
     Completar la descripcion de getBooksByTittle
     """
-    pass
+    respuesta = model.getBooksByTitle(control, title)
+    return respuesta 
 
 
 def titlesSize(control):
@@ -168,4 +169,5 @@ def titlesSize(control):
     """
     Completar la descripcion de titlesSize
     """
-    pass
+    respuesta = model.titlesSize(control)
+    return respuesta
