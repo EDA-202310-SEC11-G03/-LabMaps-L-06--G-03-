@@ -121,7 +121,10 @@ def newCatalog():
     La columna 'titles' del archivo books.csv
     """
     # TODO lab 6, agregar el ADT map con newMap()
-    catalog['titles'] = mp.newMap() #a este le falta
+    catalog['titles'] = mp.newMap(10000,
+                                 maptype='PROBING',
+                                 loadfactor=0.5,
+                                 cmpfunction=compareTitles) #a este le falta
 
     return catalog
 
@@ -271,8 +274,14 @@ def addBookTitle(catalog, title):
     """
     Completar la descripcion de addBookTitle
     """
-    mp.put(catalog['titles'], title['titles'],title) #creo que seria todo
-    pass
+    if mp.contains(catalog['titles'], title['original_title']):
+        book = mp.get(catalog['titles'], title['original_title'])
+        lista = me.getValue(book)
+        lt.addLast(lista,title)
+    else:
+        lista = lt.newList("ARRAY_LIST")
+        lt.addLast(lista, title)
+        mp.put(catalog['titles'], title['original_title'],lista)
 
 
 # ==============================
@@ -316,9 +325,9 @@ def getBookByTitle(catalog, title):
     """
     Completar la descripcion de getBookByTitle
     """
-    title = mp.get(catalog['tilte'], title)
+    title = mp.get(catalog['titles'], title)
     if title:
-        return me.getValue(title)['books']
+        return me.getValue(title)
     return None
 
 
@@ -447,9 +456,10 @@ def compareTitles(title, book):
         int: retrona 0 si son iguales, 1 si el primero es mayor
         y -1 si el primero es menor
     """
-    if title == book["titles"]:
+    book = me.getKey(book)
+    if title == book:
         return 0
-    elif title > book["titles"]:
+    elif title > book:
         return 1 
     else:
         return -1 

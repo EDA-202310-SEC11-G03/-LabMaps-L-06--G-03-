@@ -67,7 +67,7 @@ def loadBooks(control):
     input_file = csv.DictReader(open(booksfile, encoding='utf-8'))
     for book in input_file:
         model.addBook(control['model'], book)
-
+        model.addBookTitle(control["model"], book)
 
 def loadTags(control):
     """
@@ -160,7 +160,7 @@ def getBooksByTitle(control, title):
     """
     Completar la descripcion de getBooksByTittle
     """
-    respuesta = model.getBooksByTitle(control, title)
+    respuesta = model.getBookByTitle(control["model"], title)
     return respuesta 
 
 

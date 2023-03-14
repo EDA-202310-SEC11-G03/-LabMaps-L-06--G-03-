@@ -114,7 +114,7 @@ def printBooksbyTitle(books):
     """
     Completar la descripcion de printBooksbyTitle
     """
-    pass
+    print(books)
 
 # Menu de opciones
 
@@ -165,9 +165,10 @@ while True:
 
     elif int(inputs[0]) == 6:
         # TODO lab 6, conectar con las funciones del controlador e imprimir
-        # controller.getBooksByTitle(ctrlr, title)
-        # controller.titleSize(ctrlr)
-        pass
+        titulo = input("Dame un titulo a buscar: ")
+        book = controller.getBooksByTitle(ctrlr, titulo)
+        printBooksbyTitle(book["elements"])
+
 
     elif int(inputs[0]) == 0:
         break
